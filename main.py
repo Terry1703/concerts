@@ -1,54 +1,34 @@
-from concert.schema import create_schema
-from concert.queries import (
-    band_concerts, band_venues, band_play_in_venue, band_all_introductions,
-    band_most_performances, venue_concerts, venue_bands, venue_concert_on,
-    venue_most_frequent_band, concert_band, concert_venue,
-    concert_hometown_show, concert_introduction
-)
+from models import Band, Venue, Concert
 
 def main():
-    # Create the schema
-    create_schema()
+    # Example Instances
+    band_name = 'The Rockers'
+    venue_title = 'The Big Hall'
+    concert_date = '2024-09-30'
+    concert_id = 1  # Example concert ID
 
-    # Example Usage
-    print("Band Concerts:")
-    print(band_concerts('The Rockers'))
+    # Band Operations
+    band = Band(band_name)
+    print("Band Concerts:", band.concerts())
+    print("Band Venues:", band.venues())
+    band.play_in_venue(venue_title, concert_date)
+    print("All Introductions for Band:", band.all_introductions())
+    print("Band with Most Performances:", Band.most_performances().name)
 
-    print("\nBand Venues:")
-    print(band_venues('The Rockers'))
+    # Venue Operations
+    venue = Venue(venue_title)
+    print("Venue Concerts:", venue.concerts())
+    print("Venue Bands:", venue.bands())
+    print("Concert on Date:", venue.concert_on(concert_date))
+    print("Most Frequent Band at Venue:", venue.most_frequent_band().name)
 
-    print("\nBand Play in Venue:")
-    band_play_in_venue('The Rockers', 'Madison Square Garden', '2024-09-15')
+    # Concert Operations
+    concert = Concert(concert_id)
+    print("Concert Band:", concert.band().name)
+    print("Concert Venue:", concert.venue().title)
+    print("Hometown Show:", concert.hometown_show())
+    print("Concert Introduction:", concert.introduction())
 
-    print("\nBand All Introductions:")
-    print(band_all_introductions('The Rockers'))
-
-    print("\nBand Most Performances:")
-    print(band_most_performances())
-
-    print("\nVenue Concerts:")
-    print(venue_concerts('Madison Square Garden'))
-
-    print("\nVenue Bands:")
-    print(venue_bands('Madison Square Garden'))
-
-    print("\nVenue Concert on Date:")
-    print(venue_concert_on('Madison Square Garden', '2024-09-15'))
-
-    print("\nVenue Most Frequent Band:")
-    print(venue_most_frequent_band('Madison Square Garden'))
-
-    print("\nConcert Band:")
-    print(concert_band(1))
-
-    print("\nConcert Venue:")
-    print(concert_venue(1))
-
-    print("\nConcert Hometown Show:")
-    print(concert_hometown_show(1))
-
-    print("\nConcert Introduction:")
-    print(concert_introduction(1))
-
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
+

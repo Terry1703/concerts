@@ -6,7 +6,7 @@ def get_connection():
 
 # Band Methods
 def band_concerts(band_name):
-    conn = get_connection()
+    conn = get_connection(concerts)
     c = conn.cursor()
     
     c.execute('''
